@@ -30,8 +30,18 @@ make install
 cd ${SOURCE_PATH}
 rm -rf ${TARGET_PATH}/conf/vhost
 cp -rf conf/* ${TARGET_PATH}/conf/
-# 4. 启动 NGINX 进程
+```
+
+# 控制
+``` bash
+# 启动
 ${TARGET_PATH}/sbin/nginx
+# 重载配置
+${TARGET_PATH}/sbin/nginx -s reload
+# 终止
+${TARGET_PATH}/sbin/nginx -s stop
+# 停止
+${TARGET_PATH}/sbin/nginx -s quit
 ```
 
 # 参考
