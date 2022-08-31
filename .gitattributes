@@ -1,0 +1,2 @@
+vendor/nginx-1.22.0.tar.gz filter=lfs diff=lfs merge=lfs -text
+vendor/njs-0.7.7.tar.gz filter=lfs diff=lfs merge=lfs -text
