@@ -8,28 +8,13 @@
 5. 使用 ngx_http_limit_req_module 实现对请求速度限制；
 6. 使用 njs 模块实现对鉴权调用，并获取用户信息、配置等；
 
-# 编译部署流程
+# 编译
 ``` bash
-# 版本信息
-NGINX_VERSION=1.22.0
-NJS_VERSION=0.7.7
-# 目标路径
-TARGET_PATH=`pwd`/release/nginx
-SOURCE_PATH=`pwd`
-# 1. 解压源码包，创建编译环境；
-mkdir stage; cd stage
-tar xf ../vendor/nginx-${NGINX_VERSION}.tar.gz
-tar xf ../vendor/njs-${NJS_VERSION}.tar.gz
-mv njs-* njs-${NJS_VERSION}
-cd nginx-${NGINX_VERSION}
-# 2. 编译服务进程
-# -- 是否需要独立的 nginx 运行用户？
-./configure --prefix=${TARGET_PATH}  --with-http_ssl_module --with-http_auth_request_module --with-http_mp4_module --add-module=../njs-${NJS_VERSION}/nginx
-make install
-# 3. 覆盖配置
-cd ${SOURCE_PATH}
-rm -rf ${TARGET_PATH}/conf/vhost
-cp -rf conf/* ${TARGET_PATH}/conf/
+./build.sh
+# 调试逻辑可考虑在 build.sh 执行后，手动下述命令（单独编译扩展模块）
+cd stage/nginx-${NGINX_VERSION}
+make modules
+cp objs/objs/ngx_connection_counter_module.so ${NGINX_DIR}/modules/
 ```
 
 # 控制
