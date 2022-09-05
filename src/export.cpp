@@ -24,10 +24,10 @@ static ngx_http_module_t ngx_connection_counter_module_ctx = {
     NULL,       /* create main configuration */
     NULL,       /* init main configuration */
 
-    NULL,       /* create server configuration */
+    connection_counter_module::create_location_conf,       /* create server configuration */
     NULL,       /* merge server configuration */
 
-    connection_counter_module::create_location_conf,       /* create location configuration */
+    NULL,       /* create location configuration */
     NULL        /* merge location configuration */
 };
 
@@ -56,4 +56,4 @@ ngx_module_t ngx_connection_counter_module = {
     NULL,                                  /* exit master */
     NGX_MODULE_V1_PADDING
 };
-}
+} // extern "C"
